@@ -17,7 +17,7 @@ class BST {
   };
   Node* root;
   int depthRec(Node* node) const {
-    if (!node) return 0;
+    if (!node) return -1;
     int leftDepth = depthRec(node->left);
     int rightDepth = depthRec(node->right);
     return 1 + (leftDepth > rightDepth ? leftDepth : rightDepth);
@@ -68,7 +68,10 @@ class BST {
     Node* result = searchRec(root, key);
     return result ? result->count : 0;
   }
-  int depth() const { return depthRec(root); }
+  int depth() const {
+    if (!root) return 0;
+    return depthRec(root);
+  }
   void inorder(void (*visit)(const T&, int)) const {
     inorderRec(root, visit);
   }
